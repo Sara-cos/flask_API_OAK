@@ -43,6 +43,8 @@ table = ddb_resource.Table(TABLE_NAME)
 ##### Fetching dynammo db details
 
 dates_dict = {}
+id_dict = {}
+dict_ = {}
 
 def emp_dictionary_fetch() -> dict:
     """
@@ -52,16 +54,28 @@ def emp_dictionary_fetch() -> dict:
     items_list = response['Items']
     for i in range(len(items_list)):
         date = items_list[i]["DATE_KEY"]
+        id = items_list[i]["ID_KEY"]
+
         if date in dates_dict:
             dates_dict[date][items_list[i]["ID_KEY"]] = items_list[i]
         else:
             dates_dict[date] = {}
             dates_dict[date][items_list[i]["ID_KEY"]] = items_list[i]
 
-    return dates_dict
+        if id in id_dict:
+            id_dict[id][date] = items_list[i]
+        else:
+            id_dict[id] = {}
+            id_dict[id][date] = items_list[i]
 
+    dict_["ID"] = id_dict
+    dict_["DATE"] = dates_dict
 
+    return dict_
+    
 #####
+
+
 
 
 #####

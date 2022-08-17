@@ -8,7 +8,7 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Tables - Basic Tables | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+  <title>Tables - Basic Tables</title>
 
   <meta name="description" content="" />
 
@@ -52,7 +52,7 @@
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo">
           <a href="{{url_for('index')}}" class="app-brand-link">
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">DIVINEAI</span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-2">Sarina</span>
           </a>
 
           <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -212,7 +212,7 @@
           <!-- Content -->
 
           <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables</span> Basic Tables</h4>
 
             <div class="row justify-content-md-center">
               <div class="col col-lg-4">
@@ -240,7 +240,7 @@
               </div>
 
 
-              <!-- Basic Bootstrap Table -->
+              <!-- Fetched Table -->
               <div class="card">
                 <h5 class="card-header">Table Basic</h5>
                 <div class="table-responsive text-nowrap">
@@ -251,11 +251,16 @@
                         <th>Employee Name</th>
                         <th>Login Time</th>
                         <th>Logout Time</th>
-                        <th>Total</th>
-                        <th>Actions</th>
+                        <!-- <th>Total</th> -->
                       </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
+                  </table>
+                  <tbody id="data">
+                  </tbody>
+                  <!-- <script> -->
+                  <!-- </script> -->
+
+                    <!-- <tbody class="table-border-bottom-0">
                       <tr>
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular Project</strong></td>
                         <td>Albert Cook</td>
@@ -338,8 +343,8 @@
                           </div>
                         </td>
                       </tr>
-                    </tbody>
-                  </table>
+                    </tbody> -->
+                  <!-- </table> -->
                 </div>
               </div>
               <!--/ Basic Bootstrap Table -->
@@ -390,6 +395,37 @@
       <!-- Vendors JS -->
 
       <!-- Main JS -->
+      <!-- <script>
+        var responseClone; // 1
+fetch('http://127.0.0.1:5000/date_data/')
+.then(function (response) {
+    responseClone = response.clone(); // 2
+    return response.json();
+})
+.then(function (data) {
+    // Do something with data
+}, function (rejectionReason) { // 3
+    console.log('Error parsing JSON from response:', rejectionReason, responseClone); // 4
+    responseClone.text() // 5
+    .then(function (bodyText) {
+        console.log('Received the following instead of valid JSON:', bodyText); // 6
+    });
+});
+      </script> -->
+      <script>
+        fetch("{{url_for('date_data')}}").then(
+          res => {
+            res.json().then(
+              data => {
+                for (const [key, value] of Object.entries(data)){
+                  console.log(value['DIV22100']['ID_KEY']);
+                  }
+                }
+            )
+          }
+        )
+      </script>
+
       <script src="../static/js/main.js"></script>
 
       <!-- Page JS -->

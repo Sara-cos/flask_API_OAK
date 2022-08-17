@@ -17,15 +17,15 @@ def tables():
 def account():
     return render_template("pages-account-settings-account.html")
 
-@app.route('/auth/login/')
+@app.route('/login/')
 def auth_login():
     return render_template("auth-login-basic.html")
 
-@app.route('/auth/register/')
+@app.route('/register/')
 def auth_register():
     return render_template("auth-register-basic.html")
 
-@app.route('/auth/forgot_password/')
+@app.route('/forgot_password/')
 def auth_forgot_password():
     return render_template("auth-forgot-password-basic.html")
 
@@ -39,17 +39,19 @@ def misc_error():
 
 
 
-@app.route('/data',methods=['GET','POST'])
-def data_():
+@app.route('/date_data/',methods=['GET','POST'])
+def date_data():
     if request.method == 'GET':  
         emp_dict = emp_dictionary_fetch()
+        emp_dict = emp_dict["DATE"]
         return jsonify(emp_dict)
 
-
-@app.route('/start_camera',methods=['GET', 'POST'])
-def start_cam():
-    pass
-    
+@app.route('/id_data/',methods=['GET','POST'])
+def id_data():
+    if request.method == 'GET':  
+        emp_dict = emp_dictionary_fetch()
+        emp_dict = emp_dict["ID"]
+        return jsonify(emp_dict)
         
 
 if '__name__' == '__main__':
