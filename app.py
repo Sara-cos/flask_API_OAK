@@ -52,6 +52,13 @@ def id_data():
         emp_dict = emp_dictionary_fetch()
         emp_dict = emp_dict["ID"]
         return jsonify(emp_dict)
+
+@app.route('/connect_oak/', methods=['POST'])
+def connect_oak():
+    if request.method == 'POST':
+        file = open(r'test.py', 'r').read()
+        exec(file)
+        return render_template("index.html")
         
 
 if '__name__' == '__main__':
