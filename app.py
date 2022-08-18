@@ -1,10 +1,21 @@
+from flask import Flask
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from aws import *
+import time
+import blobconverter
+import boto3
+import cv2
+import io
+import depthai as dai
+import numpy as np
+from datetime import date, datetime
+# from threading import *
 
 app = Flask(__name__)
 cors = CORS(app)
 
+@app.route('/')
 @app.route('/index/')
 def index():
     return render_template("index.html")
@@ -29,14 +40,15 @@ def auth_register():
 def auth_forgot_password():
     return render_template("auth-forgot-password-basic.html")
 
-@app.route('/error_404/')
-def error_404():
-    return render_template("pages-misc-error.html")
+@app.errorhandler(404)
+def error_404(e):
+    return render_template("pages-misc-error.html"), 404
+
+app.register_error_handler(404, error_404)  
 
 @app.route('/misc_error/')
 def misc_error():
     return render_template("pages-misc-under-maintenance.html")
-
 
 
 @app.route('/date_data/',methods=['GET','POST'])
@@ -56,10 +68,16 @@ def id_data():
 @app.route('/connect_oak/', methods=['POST'])
 def connect_oak():
     if request.method == 'POST':
-        file = open(r'test.py', 'r').read()
-        exec(file)
+        try:
+            file = open(r'oak_files/main.py', 'r').read()
+            exec(file)
+        except:
+            return render_template("pages-misc-error.html")
+
         return render_template("index.html")
-        
+
+      
 
 if '__name__' == '__main__':
     app.run(debug=True)
+    # Thread(target=lambda: app.run(debug=True, use_reloader=False)).start()
