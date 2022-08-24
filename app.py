@@ -10,7 +10,6 @@ import io
 import depthai as dai
 import numpy as np
 from datetime import date, datetime
-# from threading import *
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -65,6 +64,7 @@ def id_data():
         emp_dict = emp_dict["ID"]
         return jsonify(emp_dict)
 
+
 @app.route('/connect_oak/', methods=['POST'])
 def connect_oak():
     if request.method == 'POST':
@@ -80,4 +80,3 @@ def connect_oak():
 
 if '__name__' == '__main__':
     app.run(debug=True)
-    # Thread(target=lambda: app.run(debug=True, use_reloader=False)).start()
