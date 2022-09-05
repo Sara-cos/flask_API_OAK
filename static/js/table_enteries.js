@@ -57,3 +57,15 @@ var today = new Date().format('Y-m-d')
 //             }
 //           )
 // }
+
+let ws = fetch("http://127.0.0.1:5000/date_data/");
+
+let name = document.getElementById('name');
+let logintime = document.getElementById('login');
+
+ws.onmessage = (event) => {
+    let stockObject = JSON.parse(event.data);
+    name.innerText = stockObject.name;
+    logintime.innerText = stockObject.login_time;
+    console.log(event.data)
+};

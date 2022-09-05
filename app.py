@@ -2,12 +2,7 @@ from flask import Flask
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from aws import *
-import time
-import blobconverter
-import boto3
-import cv2
-import io
-import depthai as dai
+
 import numpy as np
 from datetime import date, datetime
 

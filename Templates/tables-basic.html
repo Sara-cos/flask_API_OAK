@@ -255,8 +255,33 @@
                       </tr>
                     </thead>
                   </table>
-                  <tbody id="data">
+                  <tbody >
+                    <h1 id="name"></h1>
+
                   </tbody>
+
+
+
+
+<script>
+  let ws = fetch("http://127.0.0.1:5000/date_data/");
+
+let name = document.getElementById('name');
+let logintime = document.getElementById('login');
+
+ws.onmessage = (event) => {
+    let stockObject = JSON.parse(event.data);
+    name.innerText = stockObject.DIV22100.name;
+    logintime.innerText = stockObject.DIV22100.login_time;
+    console.log(event.data)
+};
+</script>
+
+
+
+
+
+
 
                     <!-- <tbody class="table-border-bottom-0">
                       <tr>
@@ -388,6 +413,8 @@
       <script src="../static/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
       <script src="../static/vendor/js/menu.js"></script>
+      <!-- <script src="../static/js/table_enteries.js"></script> -->
+
       <!-- endbuild -->
 
       <!-- Vendors JS -->

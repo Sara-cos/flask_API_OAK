@@ -1,5 +1,6 @@
 from credentials import AWSSecretKey, AWSAccessKeyId
 import boto3
+from credentials import AWSAccessKeyId,AWSSecretKey
 
 # print(boto3.__version__)
 
