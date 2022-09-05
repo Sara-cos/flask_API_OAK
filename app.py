@@ -50,6 +50,15 @@ def misc_error():
     return render_template("pages-misc-under-maintenance.html")
 
 
+@app.route('/raw_data/', methods=['GET','POST'])
+def raw_data():
+    if request.method == 'GET':
+        emp_dict = emp_dictionary_fetch()
+        emp_dict = emp_dict["DATA"]
+        return jsonify(emp_dict)
+
+
+
 @app.route('/date_data/',methods=['GET','POST'])
 def date_data():
     if request.method == 'GET':  

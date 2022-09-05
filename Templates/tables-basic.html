@@ -418,19 +418,20 @@
         )
       </script> -->
 
+
       <script>
         fetch("{{url_for('date_data')}}").then(
           res => {
             res.json().then(
               data => {
                 for (const [key, value] of Object.entries(data)){
-                  console.log(value['DIV22100']['name']);
+                  console.log(value);
                   }
                 }
             )
           }
         )
-      </script>
+      </script> 
 
       <script src="../static/js/main.js"></script>
 

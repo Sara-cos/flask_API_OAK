@@ -1,3 +1,61 @@
+const api_url = "http://127.0.0.1:5000/date_data/"
+
+<script type="text/javascript" class="init">
+$(document).ready(function() {
+  // Create a new DataTable object
+  table = $('#example').DataTable({
+       ajax: {
+         url: '/exampleData',
+       },
+       columns: [
+           { data: 'userId' },
+           { data: 'id' },
+           { data: 'title' },
+           { data: 'completed' }
+         ]
+       })
+});
+</script>
+
+// async function getapi(url) {
+//     const response = await fetch(url);
+
+//     var data = await response.json();
+//     console.log(data);
+
+//     if(response){
+//         hideloader();
+//     }
+//     show(data);
+// }
+
+// getapi(api_url);
+
+// function hideloader() {
+//     document.getElementById('loading').style.display = 'none';
+// }
+
+// function show(data) {
+//     let tab = 
+//         `<tr>
+//          <th>ID</th>
+//          <th>Name</th>
+//          <th>Login</th>
+//          <th>Logout</th>
+//          </tr>`;
+
+
+//     for (let r of data.list){
+//         tab += `<tr>
+//         <td>${r.}
+//         `
+//     }
+// }
+
+
+
+
+
 // var today = new Date()
 // var dd = String(today.getDate()).padStart(2, '0');
 // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -7,7 +65,7 @@
 // today = mm+'-'+dd+'-'+yyyy;
 // rev_today = yyyy+'-'+mm+'-'+dd
 
-var today = new Date().format('Y-m-d')
+// var today = new Date().format('Y-m-d')
 
 // Else if other date data needed, date is taken and passed to func below
 
