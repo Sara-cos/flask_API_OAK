@@ -46,14 +46,18 @@ table = ddb_resource.Table(TABLE_NAME)
 
 dates_dict = {}
 id_dict = {}
+raw_dict = {}
 dict_ = {}
+
 
 def emp_dictionary_fetch() -> dict:
     """
     Sends a dict with date as the keys
     """
+
     response = table.scan()
     items_list = response['Items']
+
     for i in range(len(items_list)):
         date = items_list[i]["DATE_KEY"]
         id = items_list[i]["ID_KEY"]
@@ -70,8 +74,10 @@ def emp_dictionary_fetch() -> dict:
             id_dict[id] = {}
             id_dict[id][date] = items_list[i]
 
+
     dict_["ID"] = id_dict
     dict_["DATE"] = dates_dict
+    dict_["DATA"] = items_list
 
     return dict_
     
