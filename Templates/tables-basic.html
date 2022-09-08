@@ -43,9 +43,8 @@
   <script src="../static/js/config.js"></script>
 
 
-  <script src=
-  "https://code.jquery.com/jquery-3.5.1.js">
-      </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
 
 
 </head>
@@ -213,7 +212,27 @@
         </nav>
 
         <!-- / Navbar -->
+        <script>
+          function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[0];
+              if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }
+            }
+          }
 
+        </script>
         <!-- Content wrapper -->
         <div class="content-wrapper">
           <!-- Content -->
@@ -225,18 +244,21 @@
               <div class="col col-lg-4">
                 <div class="mb-3">
                   <label for="validationCustom01" class="form-label">Start Date</label>
-                  <input type="date" class="form-control" id="validationCustom01" placeholder="Start Date">
+                  <input type="date" class="form-control" id="searchBar"
+                  oninput="Search((this.value).toLowerCase())" placeholder="Start Date">
                 </div>
               </div>
               <div class="col col-lg-4">
                 <div class="mb-3">
                   <label for="validationCustom01" class="form-label">End Date</label>
-                  <input type="date" class="form-control" id="validationCustom01" placeholder="End Date">
+                  <input type="date" class="form-control" id="searchBar"
+                  oninput="Search((this.value).toLowerCase())" placeholder="End Date">
                 </div>
               </div>
               <div class="col col-lg-4">
                 <label for="exampleDataList" class="form-label">Datalist example</label>
-                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                <input class="form-control" list="datalistOptions" id="searchBar"
+                  oninput="Search((this.value).toLowerCase())" placeholder="Type to search...">
                 <datalist id="datalistOptions">
                   <option value="San Francisco">
                   <option value="New York">
@@ -246,6 +268,20 @@
                 </datalist>
               </div>
 
+              <script>
+                function Search(item) {
+                  var collection = document.getElementsByClassName("listItem");
+                  for (i = 0; i < collection.length; i++) {
+                    if (((collection[i].innerHTML).toLowerCase()).indexOf(item) > -1) {
+                      collection[i].style.display = "table-row";
+                    } else {
+                      collection[i].style.display = "none";
+                      msg = 'No Data Available'
+                      
+                    }
+                  }
+                }
+              </script>
 
               <!-- Fetched Table -->
               <div class="card">
@@ -255,56 +291,64 @@
                     <thead>
                       <tr>
                         <th>Employee ID</th>
+                        <th>Date</th>
                         <th>Employee Name</th>
                         <th>Login Time</th>
                         <th>Logout Time</th>
-                        <!-- <th>Total</th> -->
+
                       </tr>
                     </thead>
-                  </table>
-                  <tbody >
-                    
 
-                  </tbody>
+                    <tbody >
 
-                  
-                    <!-- HEADING FORMATION -->
-                    
-          
-                    <script>
+                      <script>
+
                         $(document).ready(function () {
-          
-                            // FETCHING DATA FROM JSON FILE
-                            $.getJSON("http://127.0.0.1:5000/raw_data/", 
-                                    function (data) {
-                                var student = '';
-          
-                                // ITERATING THROUGH OBJECTS
-                                $.each(data, function (key, value) {
-          
-                                    //CONSTRUCTION OF ROWS HAVING
-                                    // DATA FROM JSON OBJECT
-                                    student += '<tr>';
-                                    student += '<td>' + 
-                                        value.ID_KEY + '</td>';
-          
-                                    student += '<td>' + 
-                                        value.name + '</td>';
-          
-                                    student += '<td>' + 
-                                        value.login_time + '</td>';
-          
-                                    student += '<td>' + 
-                                        value.logout_time + '</td>';
-          
-                                    student += '</tr>';
-                                });
-                                  
-                                //INSERTING ROWS INTO TABLE 
-                                $('#table').append(student);
+
+                          // FETCHING DATA FROM JSON FILE
+                          $.getJSON("http://127.0.0.1:5000/raw_data/",
+                            function (data) {
+                              var student = '';
+
+                              // ITERATING THROUGH OBJECTS
+                              $.each(data, function (key, value) {
+
+                                //CONSTRUCTION OF ROWS HAVING
+                                // DATA FROM JSON OBJECT
+                                student += '<tr class = "listItem">';
+                                student += '<td >' +
+                                  value.ID_KEY + '</td>';
+
+                                  student += '<td >' +
+                                  value.DATE_KEY + '</td>';
+
+                                student += '<td>' +
+                                  value.name + '</td>';
+
+                                student += '<td>' +
+                                  value.login_time + '</td>';
+
+                                student += '<td>' +
+                                  value.logout_time + '</td>';
+
+                                student += '</tr>';
+                              });
+
+                              //INSERTING ROWS INTO TABLE 
+                              $('#table').append(student);
                             });
                         });
-                    </script>
+                      </script>
+
+                    </tbody>
+
+                  </table>
+
+
+                  <!-- HEADING FORMATION -->
+
+
+
 
 
 
@@ -391,14 +435,14 @@
           res => {
             res.json().then(
               data => {
-                for (const [key, value] of Object.entries(data)){
+                for (const [key, value] of Object.entries(data)) {
                   console.log(value);
-                  }
                 }
+              }
             )
           }
         )
-      </script> 
+      </script>
 
       <script src="../static/js/main.js"></script>
 

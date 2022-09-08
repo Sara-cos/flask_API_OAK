@@ -51,6 +51,7 @@ def raw_data():
         emp_dict = emp_dictionary_fetch()
         emp_dict = emp_dict["DATA"]
         return jsonify(emp_dict)
+        
 
 @app.route('/date_data/',methods=['GET','POST'])
 def date_data():
