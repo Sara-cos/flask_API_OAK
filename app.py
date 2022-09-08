@@ -2,6 +2,7 @@ from flask import Flask
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from aws import *
+import logging
 
 import numpy as np
 from datetime import date, datetime
