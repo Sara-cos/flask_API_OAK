@@ -1,8 +1,5 @@
 from credentials import AWSSecretKey, AWSAccessKeyId
 import boto3
-from credentials import AWSAccessKeyId,AWSSecretKey
-
-# print(boto3.__version__)
 
 ddb_client = boto3.client(
     'dynamodb',
@@ -36,7 +33,7 @@ s3_resource = boto3.resource(
 TABLE_NAME = "face_recog_db"
 EMP_TABLE = "emp_db"
 s3_bucket_encods = s3_resource.Bucket(name="encods")
-s3_bucket_files = s3_resource.Bucket(name="npzfiles")
+# s3_bucket_files = s3_resource.Bucket(name="npzfiles")
 
 table_emp = ddb_resource.Table(EMP_TABLE)
 table = ddb_resource.Table(TABLE_NAME)

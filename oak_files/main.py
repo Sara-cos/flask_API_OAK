@@ -426,7 +426,7 @@ with dai.Device(pipeline) as device:
                         time = datetime.now()
                         date = str(datetime.now().date())
                         id = emp_id_dict[name_]
-                        time_ = str(time.strftime('%I:%M:%S'))
+                        time_ = str(time.strftime('%I:%M:%S %p'))
                         hour = int(time.strftime("%H"))
                         
                         if(hour < 18):
@@ -437,18 +437,28 @@ with dai.Device(pipeline) as device:
                                     'name': name_,
                                     'confidence': str(conf),
                                     'login_time': time_,
+                                    'login_time_hour':str(hour),
                                     'logout_time':'NA',
+                                    'hours':'NA',
                                 }
                             )
                         else:
+                            response = table.get_item(
+                                Key={
+                                    'DATE_KEY': date,
+                                    'ID_KEY': id,
+                                    }
+                                )
+
                             table.update_item(
                                 Key = {
                                     'DATE_KEY': date,
                                     'ID_KEY': id,
                                 },
-                                UpdateExpression="set logout_time = :logout",
+                                UpdateExpression="set logout_time = :logout AND hours = :hour",
                                 ExpressionAttributeValues = {
                                     ':logout' : time_,
+                                    ':hour'  : str(int(response['login_time_hour']) - hour),
                                 },
                                 ReturnValues="UPDATED_NEW",
                             ) 
