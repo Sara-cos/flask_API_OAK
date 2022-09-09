@@ -7,8 +7,6 @@ import io
 import depthai as dai
 import numpy as np
 from datetime import date, datetime
-from aws import *
-# from flask_API_OAK.credentials import AWSAccessKeyId, AWSSecretKey
 
 VIDEO_SIZE = (1072, 1072)
 
@@ -55,7 +53,10 @@ EMP_TABLE = "emp_db"
 table_emp = client.Table(EMP_TABLE)
 table = client.Table(TABLE_NAME)
 
-s3_bucket_files = s3_resource.Bucket(name="npzfiles")
+s3_bucket = s3_resource.Bucket(name="divineai")
+s3_encods_filter = s3_bucket.objects.filter(Prefix = 'encods/')
+s3_npzfiles_filter = s3_bucket.objects.filter(Prefix = 'npzfiles/')
+
 
 ##### fetching the employee dict ####
 def get_emp_dict():
@@ -137,9 +138,10 @@ class FaceRecognition:
         self.labels = [] #The labels has the respective names
         self.db_dic = {} #The dict has the arrays in values with names as keys
 
-        for files in s3_bucket_files.objects.all():
+        for files in s3_bucket.objects.all():
+            if files not in s3_encods_filter and files.key != 'npzfiles/':
                 full_filename_key = files.key
-                filename = full_filename_key[:-4]
+                filename = full_filename_key[9:-4]
                 self.labels.append(filename)
 
                 with io.BytesIO(files.get()['Body'].read()) as f:
@@ -463,7 +465,7 @@ with dai.Device(pipeline) as device:
                                 ReturnValues="UPDATED_NEW",
                             ) 
 
-                        # text.putText(frame, f"Done", (bbox[0] + 10, bbox[1] + 35)) 
+                        text.putText(frame, f"Done", (bbox[0] + 10, bbox[1] + 35)) 
                 
                 
                 text.putText(frame, f"{name_} {(100*conf):.0f}%", (bbox[0] + 10,bbox[1] + 35))
