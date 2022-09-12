@@ -3,6 +3,14 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from aws import *
 import logging
+import time
+import blobconverter
+import boto3
+import cv2
+import io
+import depthai as dai
+import numpy as np
+from datetime import date, datetime
 
 import numpy as np
 from datetime import date, datetime
@@ -72,13 +80,13 @@ def id_data():
 @app.route('/connect_oak/', methods=['POST'])
 def connect_oak():
     if request.method == 'POST':
-        try:
-            file = open(r'oak_files/main.py', 'r').read()
-            exec(file)
-        except:
-            return render_template("pages-misc-error.html")
+        # try:
+        file = open(r'oak_files/main.py', 'r').read()
+        exec(file)
+        # except:
+        #     return render_template("pages-misc-error.html")
 
-        return render_template("index.html")
+    return render_template("index.html")
 
       
 

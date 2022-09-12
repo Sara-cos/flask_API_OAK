@@ -1,4 +1,3 @@
-from sys import prefix
 from credentials import AWSSecretKey, AWSAccessKeyId
 import boto3
 
