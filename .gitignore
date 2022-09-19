@@ -1,2 +1,6 @@
 /credentials.py
-/oak_files
+# /oak_files
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

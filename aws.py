@@ -1,6 +1,9 @@
 from credentials import AWSSecretKey, AWSAccessKeyId
 import boto3
 
+AWSAccessKeyId = 'AKIAZTBLXFPX3NJHL73W'
+AWSSecretKey = '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'
+
 ddb_client = boto3.client(
     'dynamodb',
     region_name='ap-south-1',
@@ -32,17 +35,12 @@ s3_resource = boto3.resource(
 
 TABLE_NAME = "face_recog_db"
 EMP_TABLE = "emp_db"
-s3_bucket = s3_resource.Bucket(name="divineai")
-s3_encods_filter = s3_bucket.objects.filter(Prefix='encods/')
-s3_npzfiles_filter = s3_bucket.objects.filter(Prefix='npzfiles/')
 
 table_emp = ddb_resource.Table(EMP_TABLE)
 table = ddb_resource.Table(TABLE_NAME)
 
-# for files in s3_bucket.objects.all():
-#     if files not in s3_encods_filter and files.key != 'npzfiles/':
-#         full_filename_key = files.key
-#         print(full_filename_key[9:-4])
+s3_bucket = s3_resource.Bucket(name="divineai-npzfiles")
+
 
 ##### Fetching dynammo db details
 
@@ -84,22 +82,6 @@ def emp_dictionary_fetch() -> dict:
     return dict_
     
 #####
-
-
-
-
-#####
- 
-# encods_list = []
-# names_list = []
-
-# def access_encods():
-#     for files in s3_bucket.objects.all():
-#         file = files.get()['Body'].read().decode('utf-8')
-#         json_ = json.loads(file)
-
-#         print(json_)
-
 
 
 

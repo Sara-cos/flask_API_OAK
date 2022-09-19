@@ -80,11 +80,11 @@ def id_data():
 @app.route('/connect_oak/', methods=['POST'])
 def connect_oak():
     if request.method == 'POST':
-        # try:
-        file = open(r'oak_files/main.py', 'r').read()
-        exec(file)
-        # except:
-        #     return render_template("pages-misc-error.html")
+        try:
+            file = open(r'oak_files/main.py', 'r').read()
+            exec(file)
+        except:
+            return render_template("pages-misc-error.html")
 
     return render_template("index.html")
 

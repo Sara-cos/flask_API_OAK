@@ -52,11 +52,7 @@ EMP_TABLE = "emp_db"
 
 table_emp = client.Table(EMP_TABLE)
 table = client.Table(TABLE_NAME)
-
-s3_bucket = s3_resource.Bucket(name="divineai")
-s3_encods_filter = s3_bucket.objects.filter(Prefix = 'encods/')
-s3_npzfiles_filter = s3_bucket.objects.filter(Prefix = 'npzfiles/')
-
+s3_bucket = s3_resource.Bucket(name="divineai-npzfiles")
 
 ##### fetching the employee dict ####
 def get_emp_dict():
@@ -139,9 +135,8 @@ class FaceRecognition:
         self.db_dic = {} #The dict has the arrays in values with names as keys
 
         for files in s3_bucket.objects.all():
-            if files not in s3_encods_filter and files.key != 'npzfiles/':
                 full_filename_key = files.key
-                filename = full_filename_key[9:-4]
+                filename = full_filename_key[0:-4]
                 self.labels.append(filename)
 
                 with io.BytesIO(files.get()['Body'].read()) as f:
