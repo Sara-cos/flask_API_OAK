@@ -1,4 +1,3 @@
-from credentials import AWSSecretKey, AWSAccessKeyId
 import boto3
 
 AWSAccessKeyId = 'AKIAZTBLXFPX3NJHL73W'

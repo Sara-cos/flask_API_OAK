@@ -1,7 +1,6 @@
 from flask import Flask
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
-from aws import *
 import logging
 import time
 import blobconverter
@@ -15,7 +14,7 @@ from datetime import date, datetime
 import numpy as np
 from datetime import date, datetime
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 cors = CORS(app)
 
 @app.route('/')
@@ -91,4 +90,4 @@ def connect_oak():
       
 
 if '__name__' == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
