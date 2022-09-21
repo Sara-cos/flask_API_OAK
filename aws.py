@@ -1,7 +1,5 @@
 import boto3
-
-AWSAccessKeyId = 'AKIAZTBLXFPX3NJHL73W'
-AWSSecretKey = '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'
+from credentials import AWSAccessKeyId, AWSSecretKey
 
 ddb_client = boto3.client(
     'dynamodb',

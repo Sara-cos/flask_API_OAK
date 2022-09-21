@@ -15,8 +15,8 @@ BLOB_PATH_POSE_EST = "data\head-pose-estimation-adas-0001_openvino_2021.2_4shave
 BLOB_PATH_FACE_RECOG = "data\face-recognition-mobilefacenet-arcface_2021.2_4shave.blob"
 
 #### credentials ####
-AWSAccessKeyId = 'AKIAZTBLXFPX3NJHL73W'
-AWSSecretKey = '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'
+AWSAccessKeyId = ''
+AWSSecretKey = ''
 #### aws connections ####
 
 client = boto3.client(
