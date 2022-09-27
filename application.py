@@ -12,8 +12,8 @@ import depthai as dai
 import numpy as np
 from datetime import date, datetime
 
-AWSAccessKeyId = 'AKIAZTBLXFPX3NJHL73W'
-AWSSecretKey = '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'
+AWSAccessKeyId = ''
+AWSSecretKey = ''
 
 
 ddb_client = boto3.client(
